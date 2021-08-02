@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use App\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,5 +17,28 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call('UsersTableSeeder');
+
+        Role::create(['name' => 'comum']);
+        Role::create(['name' => 'lojista']);
+
+        $comum_role = Role::where('name', 'comum')->first();
+        $lojista_role = Role::where('name', 'lojista')->first();
+
+        $usuario_comum = User::create([
+            'name' => 'Exemplo Usuário Comum',
+            'email' => 'exemplo1@email.com',
+            'document_number' => '90698491009',
+            'password' => Hash::make('123456')
+        ]);
+
+        $usuario_lojista = User::create([
+            'name' => 'Exemplo Usuário Lojista',
+            'email' => 'exemplo2@email.com',
+            'document_number' => '03113004000174',
+            'password' => Hash::make('123456')
+        ]);
+
+        $usuario_comum->roles()->attach($comum_role);
+        $usuario_lojista->roles()->attach($lojista_role);
     }
 }

@@ -21,7 +21,7 @@ class AuthController extends Controller
             return response()->json(['message' => 'Email não cadastrado no sistema'], 401);
         }
 
-        if(Hash::check($request->input('password'), $model->password)){
+        if(!Hash::check($request->input('password'), $model->password)){
             return response()->json(['message' => 'Senha incorreta'], 401);
         }
 
@@ -31,6 +31,7 @@ class AuthController extends Controller
             'access_token' => $token->accessToken,
             'expires_at'   => $token->token->expires_at
         ], 200);
+        
 
     }
 }

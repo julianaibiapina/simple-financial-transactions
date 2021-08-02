@@ -21,3 +21,5 @@ $router->get('/', function () use ($router) {
 $router->post('/auth/login', 'AuthController@login');
 
 $router->get('users/me', 'UsersController@getAuthenticatedUser');
+
+$router->get('users', 'UsersController@getUsers');

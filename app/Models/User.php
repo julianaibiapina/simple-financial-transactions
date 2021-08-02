@@ -20,7 +20,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'cpf'
+        'name', 'email', 'document_number'
     ];
 
     /**
@@ -31,5 +31,27 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'password',
     ];
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function hasRole($role)
+    {
+        if($this->roles()->where('name', $role)->first()) {
+            return true;
+        }
+
+        return false;
+    }
+    public function hasAnyRole($roles)
+    {
+        if($this->roles()->whereIn('name', $roles)->first()) {
+            return true;
+        }
+
+        return false;
+    }
 
 }
