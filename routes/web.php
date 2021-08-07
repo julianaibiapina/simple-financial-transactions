@@ -20,6 +20,12 @@ $router->get('/', function () use ($router) {
 
 $router->post('/auth/login', 'AuthController@login');
 
-$router->get('users/me', 'UsersController@getAuthenticatedUser');
+$router->get('users/authenticated', 'UsersController@getAuthenticatedUser');
 
 $router->get('users', 'UsersController@getUsers');
+
+// $router->post('transaction', function (){
+//     return true;
+// });
+
+$router->post('transaction', 'TransactionsController@transaction');

@@ -9,6 +9,7 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
+    // TODO: colocar a logica do login em um service
     public function login(Request $request){
         $this->validate($request, [
             'email'    => 'required|email',

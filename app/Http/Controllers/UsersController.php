@@ -19,10 +19,7 @@ class UsersController extends Controller
 
     public function getUsers()
     {
-    
         $users = User::all();
-
-        // $teste = Gate::alows('make-transaction', $user);
 
         return $users;
     }

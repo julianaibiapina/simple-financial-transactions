@@ -54,4 +54,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return false;
     }
 
+    public function wallet()
+    {
+        return $this->hasOne(Wallet::class);
+    }
+
 }
