@@ -84,6 +84,11 @@ Recursos disponíveis para acesso via API:
             "payee": 2
         }
 
++ Response 200 (application/json)
+
+    {
+        "message": "sucess",
+    }
 + Response 401 (application/json)
 
     {
