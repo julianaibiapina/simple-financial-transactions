@@ -18,14 +18,11 @@ $router->get('/', function () use ($router) {
 });
 
 
-$router->post('/auth/login', 'AuthController@login');
-
-$router->get('users/authenticated', 'UsersController@getAuthenticatedUser');
+$router->post('auth/login', 'AuthController@login');
 
 $router->get('users', 'UsersController@getUsers');
 
-// $router->post('transaction', function (){
-//     return true;
-// });
+$router->get('users/authenticated', 'UsersController@getAuthenticatedUser');
+
 
 $router->post('transaction', 'TransactionsController@transaction');

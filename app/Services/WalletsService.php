@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Repositories\WalletsRepository;
 use App\Repositories\UsersRepository;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class WalletsService
 {
@@ -24,8 +25,12 @@ class WalletsService
             return response()->json(['message' => 'Payer not found'], 404);
         }
 
+        if(!Auth::guard('users')->user()->id == $payer->id) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
         if($payer->hasRole('lojista')) {
-            return response()->json(['message' => 'Unauthorized transaction for this user'], 401);
+            return response()->json(['message' => 'Unauthorized'], 401);
         }
 
         $payee = $this->usersRepository->find($request->payee);
